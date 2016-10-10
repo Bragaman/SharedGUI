@@ -22,7 +22,7 @@ private:
     void privateOnPatchObject(const BaseDTO &object) override;
     void privateOnRemoveObject(const BaseDTO &object) override;
 
-    // BaseContainerView interface
+    // TableContainerView interface
 protected:
     QList<int> getSelectedIds() override;
 };

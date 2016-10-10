@@ -1,25 +1,16 @@
 #include "tablecontainerview.h"
+
 #include <QDebug>
-TableContainerView::TableContainerView(QWidget *parent) :BaseContainerView(parent)
+TableContainerView::TableContainerView(QWidget *parent) : QTableWidget(parent)
 {
-    layout = new QVBoxLayout();
-    table = new QTableWidget();
-    table->setSelectionBehavior(QAbstractItemView::SelectRows);
-    layout->addWidget(table);
-    layout->setMargin(1);
-    setLayout(layout);
-    table->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(table, &QTableWidget::customContextMenuRequested, this, &TableContainerView::showContextMenu);
+    setSelectionBehavior(QAbstractItemView::SelectRows);
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, &QTableWidget::customContextMenuRequested,
+            this, &TableContainerView::showContextMenu);
 }
 
 TableContainerView::~TableContainerView()
 {
-
-}
-
-QTableWidget *TableContainerView::getTable() const
-{
-    return table;
 }
 
 void TableContainerView::showContextMenu(const QPoint &point)
@@ -49,33 +40,34 @@ void TableContainerView::showContextMenu(const QPoint &point)
                 emit removeObject(id);
         });
     }
-    contextMenu.exec(getTable()->mapToGlobal(point));
+    contextMenu.exec(mapToGlobal(point));
 }
 
 
-void TableContainerView::onGotObjects(QList<BaseDTO> listObjects)
+void TableContainerView::onGotObjects(QList<BaseDTO *> listObjects)
 {
     foreach (auto object, listObjects)
-        onAddObject(object);
+        onAddObject(*object);
 }
 
 void TableContainerView::onAddObject(const BaseDTO &object)
 {
-    table->setSortingEnabled(false);
+    setSortingEnabled(false);
     privateOnAddObject(object);
-    table->setSortingEnabled(isSorted);
+    setSortingEnabled(isSorted);
 }
 
 void TableContainerView::onPatchObject(const BaseDTO &object)
 {
-    table->setSortingEnabled(false);
+    setSortingEnabled(false);
     privateOnPatchObject(object);
-    table->setSortingEnabled(isSorted);
+    setSortingEnabled(isSorted);
 }
 
 void TableContainerView::onRemoveObject(const BaseDTO &object)
 {
-    table->setSortingEnabled(false);
+    setSortingEnabled(false);
     privateOnRemoveObject(object);
-    table->setSortingEnabled(isSorted);
+    setSortingEnabled(isSorted);
 }
+

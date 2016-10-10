@@ -14,13 +14,11 @@ CONFIG += c++11
 
 SOURCES += main.cpp\
         widget.cpp \
-    basecontainerview.cpp \
     basedto.cpp \
     tablecontainerview.cpp \
     testtable.cpp
 
 HEADERS  += widget.h \
-    basecontainerview.h \
     basedto.h \
     tablecontainerview.h \
     testtable.h
