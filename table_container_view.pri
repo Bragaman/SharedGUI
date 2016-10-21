@@ -1,11 +1,3 @@
-SOURCES += $$PWD/widget.cpp \
-    $$PWD/basedto.cpp \
-    $$PWD/tablecontainerview.cpp \
-    $$PWD/testtable.cpp
+SOURCES += $$PWD/tablecontainerview.cpp
 
-HEADERS  += $$PWD/widget.h \
-    $$PWD/basedto.h \
-    $$PWD/tablecontainerview.h \
-    $$PWD/testtable.h
-
-FORMS    += $$PWD/widget.ui
+HEADERS  += $$PWD/tablecontainerview.h
