@@ -6,6 +6,7 @@
 #include <QAction>
 #include <QMenu>
 #include "dto/basedto.h"
+#include "notification/warningshandler.h"
 
 class TableContainerView : public QTableWidget
 {
@@ -33,12 +34,23 @@ public:
     void onPatchObject(const BaseDTO &object);
     void onRemoveObject(const BaseDTO &object);
 
+    void deleteSelectedObjects();
+
 signals:
     void openEditor(int id);
     void removeObject(int id);
+    void removeObjects(const QList<int> ids);
 
 protected:
     virtual void initView() = 0;
+
+    virtual QString getUnitDescription(int id) = 0;
+
+    QString msgOnDeleteOne;
+    QString msgOnDeleteMore;
+
+    QString containedUnit;
+    QString containedUnits;
 };
 
 #endif // TABLECONTAINERVIEW_H
