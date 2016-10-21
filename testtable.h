@@ -3,6 +3,7 @@
 
 #include "tablecontainerview.h"
 #include <QTableWidgetItem>
+#include <QHeaderView>
 
 
 class TestTable : public TableContainerView

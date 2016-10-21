@@ -14,6 +14,8 @@ public:
     TableContainerView(QWidget* parent = nullptr);
     virtual ~TableContainerView();
 
+    virtual QList<int> getSelectedIds() = 0;
+
 private:
     bool isSorted;
 
@@ -26,9 +28,7 @@ private slots:
 
 public slots:
 
-    // BaseContainerView interface
 public:
-    void onGotObjects(QList<BaseDTO *> listObjects);
     void onAddObject(const BaseDTO &object);
     void onPatchObject(const BaseDTO &object);
     void onRemoveObject(const BaseDTO &object);
@@ -37,10 +37,7 @@ signals:
     void openEditor(int id);
     void removeObject(int id);
 
-
-    // BaseContainerView interface
 protected:
-    virtual QList<int> getSelectedIds() = 0;
     virtual void initView() = 0;
 };
 

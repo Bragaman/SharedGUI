@@ -1,8 +1,8 @@
 #include "tablecontainerview.h"
 
-#include <QDebug>
 TableContainerView::TableContainerView(QWidget *parent) : QTableWidget(parent)
 {
+    setEditTriggers(QAbstractItemView::NoEditTriggers);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, &QTableWidget::customContextMenuRequested,
@@ -41,13 +41,6 @@ void TableContainerView::showContextMenu(const QPoint &point)
         });
     }
     contextMenu.exec(mapToGlobal(point));
-}
-
-
-void TableContainerView::onGotObjects(QList<BaseDTO *> listObjects)
-{
-    foreach (auto object, listObjects)
-        onAddObject(*object);
 }
 
 void TableContainerView::onAddObject(const BaseDTO &object)

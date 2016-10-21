@@ -16,6 +16,8 @@ void TestTable::initView()
                            << tr("id")
                            << tr("rule")
                            );
+    horizontalHeader()->setSectionResizeMode(Columns::ID, QHeaderView::Stretch);
+    horizontalHeader()->setSectionResizeMode(Columns::NAME, QHeaderView::Stretch);
 
 
 }
