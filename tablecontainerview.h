@@ -5,7 +5,7 @@
 #include <QTableWidget>
 #include <QAction>
 #include <QMenu>
-#include "basedto.h"
+#include "dto/basedto.h"
 
 class TableContainerView : public QTableWidget
 {
