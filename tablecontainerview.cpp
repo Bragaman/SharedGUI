@@ -3,6 +3,7 @@
 TableContainerView::TableContainerView(QWidget *parent) : QTableWidget(parent)
 {
     setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, &QTableWidget::customContextMenuRequested,

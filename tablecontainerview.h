@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QAction>
 #include <QMenu>
+#include <QHeaderView>
 #include "dto/basedto.h"
 #include "notification/warningshandler.h"
 
@@ -18,8 +19,6 @@ public:
     virtual QList<int> getSelectedIds() = 0;
 
 private:
-    bool isSorted;
-
     virtual void privateOnAddObject(const BaseDTO &object) = 0;
     virtual void privateOnPatchObject(const BaseDTO &object ) = 0;
     virtual void privateOnRemoveObject(const BaseDTO &object ) = 0;
@@ -42,6 +41,7 @@ signals:
     void removeObjects(const QList<int> ids);
 
 protected:
+    bool isSorted;
     virtual void initView() = 0;
 
     virtual QString getUnitDescription(int id) = 0;
