@@ -14,6 +14,11 @@ Widget::Widget(QWidget *parent) :
             patchObj(id);
     });
     connect(ui->tableWidget, &TestTable::removeObject, this, &Widget::removeObj);
+    connect(ui->tableWidget, &TestTable::removeObjects, this, [this](const QList<int> ids){
+        foreach (auto id, ids) {
+            removeObj(id);
+        }
+    });
 }
 
 Widget::~Widget()

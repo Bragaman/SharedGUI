@@ -12,6 +12,17 @@ TARGET = SharedGUI
 TEMPLATE = app
 CONFIG += c++11
 
-SOURCES += main.cpp
+HEADERS += \
+    widget.h \
+    basedto.h \
+    testtable.h
+
+SOURCES += main.cpp \
+        widget.cpp \
+    basedto.cpp \
+    testtable.cpp
 
 include (table_container_view.pri)
+
+FORMS += \
+    widget.ui

@@ -6,8 +6,8 @@
 #include <QAction>
 #include <QMenu>
 #include <QHeaderView>
-#include "dto/basedto.h"
-#include "notification/warningshandler.h"
+
+class BaseDTO;
 
 class TableContainerView : public QTableWidget
 {
@@ -45,6 +45,8 @@ protected:
     virtual void initView() = 0;
 
     virtual QString getUnitDescription(int id) = 0;
+
+    virtual bool askToDelete(bool single, QList<int> ids) = 0;
 
     QString msgOnDeleteOne;
     QString msgOnDeleteMore;

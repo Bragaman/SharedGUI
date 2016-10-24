@@ -58,3 +58,26 @@ QList<int> TestTable::getSelectedIds()
     return result;
 }
 
+QString TestTable::getUnitDescription(int id)
+{
+    return QString::number(id);
+}
+
+bool TestTable::askToDelete(bool single, QList<int> ids)
+{
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Question);
+    QString msg = "Are you sure you want to delete ";
+    if (single)
+        msgBox.setText(msg.append("item with id = %1?").arg(getUnitDescription(ids.at(0))));
+
+    else
+        msgBox.setText(msg.append("selected items (%1)?").arg(getUnitDescription(ids.size())));
+
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    msgBox.setButtonText(QMessageBox::No, tr("No"));
+
+    return (msgBox.exec() == QMessageBox::Yes);
+}
+

@@ -68,14 +68,13 @@ void TableContainerView::onRemoveObject(const BaseDTO &object)
 void TableContainerView::deleteSelectedObjects()
 {
     auto ids = getSelectedIds();
-    if (ids.size() == 1) {
-        if (WarningsHandler::showInfoBoxYesNo(msgOnDeleteOne.arg(containedUnit).arg(getUnitDescription(ids.at(0)))))
-            emit removeObject(ids.at(0));
-    } else {
-            if (WarningsHandler::showInfoBoxYesNo(msgOnDeleteMore.arg(containedUnits).arg(ids.count()))) {
-                clearSelection();
-                emit removeObjects(ids);
-            }
+    bool single = ids.size() == 1;
+    bool userAllowed = askToDelete(single, ids);
+    if (single && userAllowed) {
+        emit removeObject(ids.at(0));
+    } else if (!single && userAllowed) {
+        clearSelection();
+        emit removeObjects(ids);
     }
 }
 

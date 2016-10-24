@@ -4,6 +4,8 @@
 #include "tablecontainerview.h"
 #include <QTableWidgetItem>
 #include <QHeaderView>
+#include <QMessageBox>
+#include "basedto.h"
 
 
 class TestTable : public TableContainerView
@@ -26,6 +28,9 @@ private:
     // TableContainerView interface
 protected:
     QList<int> getSelectedIds() override;
+
+    QString getUnitDescription(int id);
+    bool askToDelete(bool single, QList<int> ids);
 };
 
 #endif // TESTTABLE_H
