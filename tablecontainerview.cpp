@@ -22,9 +22,14 @@ void TableContainerView::showContextMenu(const QPoint &point)
     auto ids = getSelectedIds();
     QMenu contextMenu(tr("Context menu"), this);
 
-    QAction actionAdd("add", this);
-    contextMenu.addAction(&actionAdd);
-    connect(&actionAdd, &QAction::triggered, this, [=](){
+    QWidgetAction *actionWAdd = new QWidgetAction(this);
+    ActionWidget *actionView = new ActionWidget(this, tr("Add"));
+    actionView->setObjectName("actionAdd");
+    actionWAdd->setDefaultWidget(actionView);
+
+//    QAction actionAdd("add", this);
+    contextMenu.addAction(actionWAdd);
+    connect(actionWAdd, &QAction::triggered, this, [=](){
         emit openEditor(-1);
     });
 
