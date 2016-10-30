@@ -1,4 +1,5 @@
 #include "tablecontainerview.h"
+#include "QPushButton"
 
 TableContainerView::TableContainerView(QWidget *parent) : QTableWidget(parent)
 {
@@ -11,42 +12,52 @@ TableContainerView::TableContainerView(QWidget *parent) : QTableWidget(parent)
 
     msgOnDeleteOne = tr("Are you sure you want to delete %1 %2?");
     msgOnDeleteMore = tr("Are you sure you want to delete selected %1 (%2)?");
+
+    menu = nullptr;
 }
 
 TableContainerView::~TableContainerView()
 {
 }
 
+QWidgetAction * TableContainerView::createActionWidget(const QString &name, const QString &objName)
+{
+    QWidgetAction *actionWAdd = new QWidgetAction(this);
+    QPushButton *btnAdd = new QPushButton(name);
+    btnAdd->setObjectName(objName);
+    connect(btnAdd, &QPushButton::clicked, actionWAdd, &QWidgetAction::trigger);
+    actionWAdd->setDefaultWidget(btnAdd);
+    return actionWAdd;
+}
+
 void TableContainerView::showContextMenu(const QPoint &point)
 {
-    auto ids = getSelectedIds();
-    QMenu contextMenu(tr("Context menu"), this);
-
-    QWidgetAction *actionWAdd = new QWidgetAction(this);
-    ActionWidget *actionView = new ActionWidget(this, tr("Add"));
-    actionView->setObjectName("actionAdd");
-    actionWAdd->setDefaultWidget(actionView);
-
-//    QAction actionAdd("add", this);
-    contextMenu.addAction(actionWAdd);
-    connect(actionWAdd, &QAction::triggered, this, [=](){
+    auto listCurId = getSelectedIds();
+    menu = new QMenu(tr("Context menu"), this);
+    auto actionAdd = createActionWidget(tr("Add"), "actionAdd");
+    connect(actionAdd, &QAction::triggered, this, [=](){
         emit openEditor(-1);
+        menu->close();
     });
+    menu->addAction(actionAdd);
 
-    QAction actionPatch("patch", this);
-    if (ids.size() == 1) {
-        contextMenu.addAction(&actionPatch);
-        connect(&actionPatch, &QAction::triggered, this, [ids, this](){
-            emit openEditor(ids.at(0));
-        });
+    if (!listCurId.isEmpty()) {
+        if (listCurId.size() == 1) {
+            auto actionPatch = createActionWidget(tr("patch"), "actionPatch");
+            connect(actionPatch, &QAction::triggered, this, [this, listCurId](){
+                emit openEditor(listCurId.at(0));
+                menu->close();
+
+            });
+            menu->addAction(actionPatch);
+        }
+
+        auto actionRemove = createActionWidget(tr("remove"), "actionRemove");
+        connect(actionRemove, &QAction::triggered, this, &TableContainerView::deleteSelectedObjects);
+        menu->addAction(actionRemove);
     }
 
-    QAction actionRemove("remove", this);
-    if (!ids.isEmpty()) {
-        contextMenu.addAction(&actionRemove);
-        connect(&actionRemove, &QAction::triggered, this, &TableContainerView::deleteSelectedObjects);
-    }
-    contextMenu.exec(mapToGlobal(point));
+    menu->exec(mapToGlobal(point));
 }
 
 void TableContainerView::onAddObject(const BaseDTO &object)
@@ -81,5 +92,6 @@ void TableContainerView::deleteSelectedObjects()
         clearSelection();
         emit removeObjects(ids);
     }
+    menu->close();
 }
 

@@ -26,6 +26,10 @@ private:
     virtual void privateOnPatchObject(const BaseDTO &object ) = 0;
     virtual void privateOnRemoveObject(const BaseDTO &object ) = 0;
 
+    QWidgetAction * createActionWidget(const QString &name, const QString &objName);
+
+    QMenu *menu;
+
 private slots:
     void showContextMenu(const QPoint &point);
 
