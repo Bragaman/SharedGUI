@@ -22,18 +22,20 @@ TableContainerView::~TableContainerView()
 
 QWidgetAction * TableContainerView::createActionWidget(const QString &name, const QString &objName)
 {
-    QWidgetAction *actionWAdd = new QWidgetAction(this);
-    QPushButton *btnAdd = new QPushButton(name);
-    btnAdd->setObjectName(objName);
-    connect(btnAdd, &QPushButton::clicked, actionWAdd, &QWidgetAction::trigger);
-    actionWAdd->setDefaultWidget(btnAdd);
-    return actionWAdd;
+    QWidgetAction *actionWidget = new QWidgetAction(this);
+//    actionWidget->setObjectName(objName);
+    QPushButton *btnIcon = new QPushButton(name);
+    btnIcon->setObjectName(objName);
+    connect(btnIcon, &QPushButton::clicked, actionWidget, &QWidgetAction::trigger);
+    actionWidget->setDefaultWidget(btnIcon);
+    return actionWidget;
 }
 
 void TableContainerView::showContextMenu(const QPoint &point)
 {
     auto listCurId = getSelectedIds();
     menu = new QMenu(tr("Context menu"), this);
+//    menu->setObjectName("contextMenu");
     auto actionAdd = createActionWidget(tr("Add"), "actionAdd");
     connect(actionAdd, &QAction::triggered, this, [=](){
         emit openEditor(-1);
