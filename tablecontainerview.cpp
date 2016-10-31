@@ -94,6 +94,7 @@ void TableContainerView::deleteSelectedObjects()
         clearSelection();
         emit removeObjects(ids);
     }
-    menu->close();
+    if (menu)
+        menu->close();
 }
 
