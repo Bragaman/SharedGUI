@@ -1,8 +1,5 @@
-SOURCES += $$PWD/tablecontainerview.cpp \
-    $$PWD/actionwidget.cpp
+SOURCES += $$PWD/tablecontainerview.cpp
 
-HEADERS  += $$PWD/tablecontainerview.h \
-    $$PWD/actionwidget.h
+HEADERS  += $$PWD/tablecontainerview.h
 
-FORMS += \
-    $$PWD/actionwidget.ui
+FORMS +=

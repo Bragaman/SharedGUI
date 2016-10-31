@@ -8,7 +8,6 @@
 #include <QMenu>
 #include <QHeaderView>
 
-#include "actionwidget.h"
 
 class BaseDTO;
 

@@ -43,7 +43,7 @@ void TableContainerView::showContextMenu(const QPoint &point)
 
     if (!listCurId.isEmpty()) {
         if (listCurId.size() == 1) {
-            auto actionPatch = createActionWidget(tr("patch"), "actionPatch");
+            auto actionPatch = createActionWidget(tr("Patch"), "actionPatch");
             connect(actionPatch, &QAction::triggered, this, [this, listCurId](){
                 emit openEditor(listCurId.at(0));
                 menu->close();
@@ -52,7 +52,7 @@ void TableContainerView::showContextMenu(const QPoint &point)
             menu->addAction(actionPatch);
         }
 
-        auto actionRemove = createActionWidget(tr("remove"), "actionRemove");
+        auto actionRemove = createActionWidget(tr("Remove"), "actionRemove");
         connect(actionRemove, &QAction::triggered, this, &TableContainerView::deleteSelectedObjects);
         menu->addAction(actionRemove);
     }
