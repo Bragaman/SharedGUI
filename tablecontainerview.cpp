@@ -86,6 +86,9 @@ void TableContainerView::onRemoveObject(const BaseDTO &object)
 void TableContainerView::deleteSelectedObjects()
 {
     auto ids = getSelectedIds();
+    if (ids.empty())
+        return;
+
     bool single = ids.size() == 1;
     bool userAllowed = askToDelete(single, ids);
     if (single && userAllowed) {
