@@ -20,6 +20,12 @@ public:
 
     virtual QList<int> getSelectedIds() = 0;
 
+    void onAddObject(const BaseDTO &object);
+    void onPatchObject(const BaseDTO &object);
+    void onRemoveObject(const BaseDTO &object);
+
+    void deleteSelectedObjects();
+
 private:
     virtual void privateOnAddObject(const BaseDTO &object) = 0;
     virtual void privateOnPatchObject(const BaseDTO &object ) = 0;
@@ -31,15 +37,6 @@ private:
 
 private slots:
     void showContextMenu(const QPoint &point);
-
-public slots:
-
-public:
-    void onAddObject(const BaseDTO &object);
-    void onPatchObject(const BaseDTO &object);
-    void onRemoveObject(const BaseDTO &object);
-
-    void deleteSelectedObjects();
 
 signals:
     void openEditor(int id);

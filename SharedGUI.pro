@@ -26,3 +26,5 @@ include (table_container_view.pri)
 
 FORMS += \
     widget.ui
+
+OTHER_FILES += *.qmodel
