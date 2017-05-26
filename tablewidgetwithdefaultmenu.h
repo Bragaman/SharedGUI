@@ -1,5 +1,5 @@
-#ifndef TABLECONTAINERVIEW_H
-#define TABLECONTAINERVIEW_H
+#ifndef TABLEWIDGETWITHDEFAULTMENU_H
+#define TABLEWIDGETWITHDEFAULTMENU_H
 
 #include <QVBoxLayout>
 #include <QTableWidget>
@@ -8,33 +8,17 @@
 #include <QMenu>
 #include <QHeaderView>
 
+#include "tablewidgetwithmenu.h"
+
 
 class BaseDTO;
 
-class TableContainerView : public QTableWidget
+class TableWidgetWithDefaultMenu : public TableWidgetWithMenu
 {
     Q_OBJECT
 public:
-    TableContainerView(QWidget* parent = nullptr);
-    virtual ~TableContainerView();
+    TableWidgetWithDefaultMenu(QWidget* parent = nullptr);
 
-    virtual QList<int> getSelectedIds() = 0;
-
-private:
-    virtual void privateOnAddObject(const BaseDTO &object) = 0;
-    virtual void privateOnPatchObject(const BaseDTO &object ) = 0;
-    virtual void privateOnRemoveObject(const BaseDTO &object ) = 0;
-
-    QWidgetAction * createActionWidget(const QString &name, const QString &objName);
-
-    QMenu *menu;
-
-private slots:
-    void showContextMenu(const QPoint &point);
-
-public slots:
-
-public:
     void onAddObject(const BaseDTO &object);
     void onPatchObject(const BaseDTO &object);
     void onRemoveObject(const BaseDTO &object);
@@ -48,7 +32,6 @@ signals:
 
 protected:
     bool isSorted;
-    virtual void initView() = 0;
 
     virtual QString getUnitDescription(int id) = 0;
 
@@ -59,6 +42,19 @@ protected:
 
     QString containedUnit;
     QString containedUnits;
+
+    virtual QList<QWidgetAction *> getPossibleActions();
+
+    virtual void initActions();
+
+private:
+    virtual void privateOnAddObject(const BaseDTO &object) = 0;
+    virtual void privateOnPatchObject(const BaseDTO &object ) = 0;
+    virtual void privateOnRemoveObject(const BaseDTO &object ) = 0;
+
+    QWidgetAction *actionAdd = nullptr;
+    QWidgetAction *actionPatch = nullptr;
+    QWidgetAction *actionRemove = nullptr;
 };
 
-#endif // TABLECONTAINERVIEW_H
+#endif // TABLEWIDGETWITHDEFAULTMENU_H

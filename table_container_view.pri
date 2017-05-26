@@ -1,5 +1,9 @@
 INCLUDEPATH += $$PWD
 
-SOURCES += $$PWD/tablecontainerview.cpp
+SOURCES += \
+    $$PWD/tablewidgetwithmenu.cpp \
+    $$PWD/tablewidgetwithdefaultmenu.cpp
 
-HEADERS  += $$PWD/tablecontainerview.h
+HEADERS  += \
+    $$PWD/tablewidgetwithmenu.h \
+    $$PWD/tablewidgetwithdefaultmenu.h
