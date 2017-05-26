@@ -23,7 +23,8 @@ void TableWidgetWithMenu::showContextMenu(const QPoint &point)
 
 
 QWidgetAction *TableWidgetWithMenu::createActionWidget(
-        const QString &name, const QString &objName){
+        const QString &name, const QString &objName)
+{
     QWidgetAction *actionWidget = new QWidgetAction(this);
     QPushButton *btnIcon = new QPushButton(name);
     btnIcon->setObjectName(objName);
