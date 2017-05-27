@@ -1,7 +1,7 @@
 #include "testtable.h"
 #include <QDebug>
 
-TestTable::TestTable(QWidget *parent) : TableContainerView(parent)
+TestTable::TestTable(QWidget *parent) : TableWidgetWithDefaultMenu(parent)
 {
     initView();
 }

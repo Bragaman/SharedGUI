@@ -1,14 +1,14 @@
 #ifndef TESTTABLE_H
 #define TESTTABLE_H
 
-#include "tablecontainerview.h"
+#include <tablewidgetwithdefaultmenu.h>
 #include <QTableWidgetItem>
 #include <QHeaderView>
 #include <QMessageBox>
 #include "basedto.h"
 
 
-class TestTable : public TableContainerView
+class TestTable : public TableWidgetWithDefaultMenu
 {
     Q_OBJECT
 public:

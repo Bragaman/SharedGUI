@@ -13,16 +13,11 @@ TEMPLATE = app
 CONFIG += c++11
 
 HEADERS += \
-    widget.h \
-    basedto.h \
-    testtable.h
+    basedto.h
 
-SOURCES += main.cpp \
-        widget.cpp \
-    basedto.cpp \
-    testtable.cpp
+
+SOURCES += \
+    basedto.cpp
 
 include (table_container_view.pri)
-
-FORMS += \
-    widget.ui
+include (examples/examples.pri)
