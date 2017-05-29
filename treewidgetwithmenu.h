@@ -15,6 +15,9 @@ class TreeWidgetWithMenu : public QTreeWidget
 public:
     TreeWidgetWithMenu(QWidget *parent = 0);
 
+    //call in child constructor, init headers and some view settings
+    virtual void initView() = 0;
+
 protected:
     QWidgetAction *createActionWidget(const QString &name, const QString &objName);
 
@@ -27,9 +30,6 @@ protected:
 
     virtual QList<int> getSelectedTopIds();
     virtual QList<int> getSelectedIds() = 0;
-
-    //call in child constructor, init headers and some view settings
-    virtual void initView() = 0;
 
     bool hasMenuSections = false;
 
