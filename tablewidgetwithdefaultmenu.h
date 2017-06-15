@@ -31,8 +31,6 @@ signals:
     void removeObjects(const QList<int> ids);
 
 protected:
-    bool isSorted;
-
     virtual QString getUnitDescription(int id) = 0;
 
     virtual bool askToDelete(bool single, QList<int> ids) = 0;

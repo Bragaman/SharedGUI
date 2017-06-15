@@ -12,6 +12,8 @@ public:
     TableWidgetWithMenu(QWidget *parent = 0);
 
 protected:
+    bool isSorted;
+
     QWidgetAction *createActionWidget(const QString &name, const QString &objName);
 
     //choose actions according to selected rows of smthng like this
