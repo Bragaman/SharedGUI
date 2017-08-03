@@ -12,6 +12,7 @@ QWidgetAction *TreeWidgetWithMenu::createActionWidget(
 {
     QWidgetAction *actionWidget = new QWidgetAction(this);
     QPushButton *btnIcon = new QPushButton(name);
+    btnIcon->setToolTip(name);
     btnIcon->setObjectName(objName);
     connect(btnIcon, &QPushButton::clicked, actionWidget, &QWidgetAction::trigger);
     actionWidget->setDefaultWidget(btnIcon);
